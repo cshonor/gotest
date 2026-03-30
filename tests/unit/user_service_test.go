@@ -1,4 +1,4 @@
-package service
+package unit_test
 
 import (
 	"context"
@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"testsystem/internal/model"
+	"testsystem/internal/service"
 )
 
 type fakeUserRepo struct {
@@ -30,7 +31,7 @@ func TestCreateUser_ValidateAndCallRepo(t *testing.T) {
 			return nil, nil
 		},
 	}
-	svc := NewUserService(repo)
+	svc := service.NewUserService(repo)
 
 	if _, err := svc.CreateUser(context.Background(), "a"); err == nil {
 		t.Fatalf("expected validation error, got nil")
@@ -55,7 +56,7 @@ func TestListUsers_RepoError(t *testing.T) {
 			return nil, wantErr
 		},
 	}
-	svc := NewUserService(repo)
+	svc := service.NewUserService(repo)
 	_, err := svc.ListUsers(context.Background())
 	if !errors.Is(err, wantErr) {
 		t.Fatalf("want %v, got %v", wantErr, err)

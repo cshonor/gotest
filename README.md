@@ -19,13 +19,13 @@
 │   ├── repository/
 │   │   ├── repository.go
 │   │   ├── sqlite_user_repository.go
-│   │   └── sqlite_user_repository_integration_test.go
 │   └── service/
-│       ├── user_service.go
-│       └── user_service_unit_test.go
-└── test/
+│       └── user_service.go
+└── tests/
     ├── benchmark/benchmark_test.go
-    └── e2e/api_e2e_test.go
+    ├── e2e/api_test.go
+    ├── integration/sqlite_user_repository_test.go
+    └── unit/user_service_test.go
 ```
 
 ## 本地运行
@@ -45,19 +45,19 @@ go run ./cmd/api
 ### 1) 单元测试（Unit Test）
 
 ```powershell
-go test ./internal/service -v
+go test ./tests/unit -v
 ```
 
 ### 2) 集成测试（Integration Test）
 
 ```powershell
-go test ./internal/repository -v
+go test ./tests/integration -v
 ```
 
 ### 3) E2E 接口测试（端到端）
 
 ```powershell
-go test ./test/e2e -v
+go test ./tests/e2e -v
 ```
 
 ### 4) 全量测试
@@ -69,13 +69,13 @@ go test ./... -v
 ### 5) 基准测试（Benchmark）
 
 ```powershell
-go test ./test/benchmark -bench=. -benchmem -run=^$
+go test ./tests/benchmark -bench=. -benchmem -run=^$
 ```
 
 可重复多轮稳定性观察（示例）：
 
 ```powershell
-go test ./test/benchmark -bench=. -benchmem -run=^$ -count=5
+go test ./tests/benchmark -bench=. -benchmem -run=^$ -count=5
 ```
 
 ## 说明

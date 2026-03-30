@@ -1,4 +1,4 @@
-package repository
+package integration_test
 
 import (
 	"context"
@@ -7,9 +7,11 @@ import (
 	"testing"
 
 	_ "modernc.org/sqlite"
+
+	"testsystem/internal/repository"
 )
 
-func TestSQLiteUserRepository_CreateAndList_Integration(t *testing.T) {
+func TestSQLiteUserRepository_CreateAndList(t *testing.T) {
 	dbPath := filepath.Join(t.TempDir(), "test.db")
 	db, err := sql.Open("sqlite", dbPath)
 	if err != nil {
@@ -17,7 +19,7 @@ func TestSQLiteUserRepository_CreateAndList_Integration(t *testing.T) {
 	}
 	defer db.Close()
 
-	repo, err := NewSQLiteUserRepository(db)
+	repo, err := repository.NewSQLiteUserRepository(db)
 	if err != nil {
 		t.Fatalf("new repo: %v", err)
 	}

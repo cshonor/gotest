@@ -1,4 +1,4 @@
-package e2e
+package e2e_test
 
 import (
 	"bytes"
@@ -15,7 +15,7 @@ import (
 	"testsystem/internal/model"
 )
 
-func TestAPI_CreateThenListUsers_E2E(t *testing.T) {
+func TestAPI_CreateThenListUsers(t *testing.T) {
 	dbPath := filepath.Join(t.TempDir(), "e2e.db")
 	db, err := sql.Open("sqlite", dbPath)
 	if err != nil {
